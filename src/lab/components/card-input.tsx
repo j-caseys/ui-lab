@@ -21,7 +21,8 @@ const BRANDS: Record<Brand, BrandSpec> = {
   visa: { name: "Visa", test: /^4/, lengths: [16, 13, 19], gaps: [4, 8, 12, 16], cvc: 3 },
   mastercard: {
     name: "Mastercard",
-    test: /^(5[1-5]|2[2-7])/,
+    // The 2-series is only 2221 to 2720; 2200 to 2204 belongs to Mir.
+    test: /^(5[1-5]|222[1-9]|22[3-9]\d|2[3-6]\d{2}|27[01]\d|2720)/,
     lengths: [16],
     gaps: [4, 8, 12],
     cvc: 3,
