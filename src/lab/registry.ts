@@ -1645,7 +1645,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "sidebar-highlight",
-    isNew: true,
     name: "Sidebar highlight",
     category: "navigation",
     description: "A dot travels to whatever you pick and takes on its section colour, which then wipes across the label.",
@@ -1702,6 +1701,16 @@ export const lab: LabEntry[] = [
     keywords: "qr code reveal particles dust share scan link canvas",
     previewScale: 0.55,
     credit: { name: "bakai", url: "https://x.com/samakov0" },
+  },
+  {
+    slug: "clock-field",
+    isNew: true,
+    name: "Clock field",
+    category: "playground",
+    description: "A field of clocks whose hands turn as one, melting between a wave, a vortex, rings and a funnel; they look at your pointer, and a click sends a ripple through them.",
+    keywords: "clock grid hands wave illusion optical vortex generative canvas",
+    previewScale: 0.45,
+    credit: { name: "A. L. Crego", url: "https://x.com/alcrego_" },
   },
   // new-component:entries
 ];

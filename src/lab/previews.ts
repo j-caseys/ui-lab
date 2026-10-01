@@ -196,6 +196,7 @@ import SidebarSubmenuDemo from "./components/sidebar-submenu";
 import FloatingActionMenuDemo from "./components/floating-action-menu";
 import PushLockButtonDemo from "./components/push-lock-button";
 import QrRevealDemo from "./components/qr-reveal";
+import ClockFieldDemo from "./components/clock-field";
 // new-component:imports
 
 // The index shows every demo at once, so one static bundle beats 27 separate
@@ -398,5 +399,6 @@ export const previews: Record<string, ComponentType> = {
   "floating-action-menu": FloatingActionMenuDemo,
   "push-lock-button": PushLockButtonDemo,
   "qr-reveal": QrRevealDemo,
+  "clock-field": ClockFieldDemo,
   // new-component:entries
 };

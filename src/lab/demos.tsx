@@ -204,6 +204,7 @@ const demos: Record<string, ComponentType> = {
   "floating-action-menu": dynamic(() => import("./components/floating-action-menu")),
   "push-lock-button": dynamic(() => import("./components/push-lock-button")),
   "qr-reveal": dynamic(() => import("./components/qr-reveal")),
+  "clock-field": dynamic(() => import("./components/clock-field")),
   // new-component:entries
 };
 
