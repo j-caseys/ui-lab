@@ -22,6 +22,9 @@ const MAX_TILT = 6;
 const FOLLOW = { stiffness: 300, damping: 30 };
 // How far the card rises toward you at the halfway point of a flip.
 const LIFT_SCALE = 0.03;
+// Held down, the card gives a little under your finger.
+const PRESS_SCALE = 0.96;
+const PRESS = { duration: 0.15, ease: [0.23, 1, 0.32, 1] } as const;
 
 export function FlipCard({
   front,
@@ -43,6 +46,15 @@ export function FlipCard({
   const moveFocus = useRef(false);
 
   const flip = useMotionValue(0);
+  // Lives in the same transform as the flip. A CSS scale on a wrapper
+  // around the 3D card makes Safari flatten it into an opaque square for
+  // as long as the press lasts.
+  const press = useMotionValue(1);
+  const setPressed = (down: boolean) => {
+    const to = down ? PRESS_SCALE : 1;
+    if (reduceMotion) press.jump(to);
+    else animate(press, to, PRESS);
+  };
 
   // Pointer position across the card, -1 to 1 on each axis.
   const pointerX = useMotionValue(0);
@@ -59,15 +71,21 @@ export function FlipCard({
   const lift = useTransform(flip, (v) =>
     Math.abs(Math.sin((v * Math.PI) / 180)),
   );
-  const scale = useTransform(lift, (l) => 1 + l * LIFT_SCALE);
+  const scale = useTransform(
+    () => (1 + lift.get() * LIFT_SCALE) * press.get(),
+  );
   // Tilt adds to the flip in world space, so the lean still follows the
   // cursor when the back is showing.
   const turn = useTransform(() => flip.get() + tiltY.get());
   const transform = useMotionTemplate`rotateX(${tiltX}deg) rotateY(${turn}deg) scale(${scale})`;
+  // Reduced motion keeps the press, just without the turn.
+  const pressTransform = useMotionTemplate`scale(${press})`;
 
   // Raised higher, the shadow falls further away, spreads and darkens.
   const shadowY = useTransform(lift, (l) => 14 + l * 22);
-  const shadowScale = useTransform(lift, (l) => 0.92 + l * 0.08);
+  const shadowScale = useTransform(
+    () => (0.92 + lift.get() * 0.08) * press.get(),
+  );
   const shadowOpacity = useTransform(lift, (l) => 0.3 + l * 0.3);
   const shadowTransform = useMotionTemplate`translateY(${shadowY}px) scale(${shadowScale})`;
 
@@ -105,9 +123,23 @@ export function FlipCard({
   return (
     <div
       className={cn(
-        "relative h-[420px] w-[min(320px,100%)] touch-manipulation transition-[scale] duration-150 ease-out select-none has-[button:active]:scale-[0.96] motion-reduce:transition-none",
+        "relative h-[420px] w-[min(320px,100%)] touch-manipulation select-none",
         className,
       )}
+      onPointerDown={(e) => {
+        if (e.button === 0 && (e.target as Element).closest("button")) {
+          setPressed(true);
+        }
+      }}
+      onPointerUp={() => setPressed(false)}
+      onPointerCancel={() => setPressed(false)}
+      onKeyDown={(e) => {
+        if (e.key === " " && !e.repeat) setPressed(true);
+      }}
+      onKeyUp={(e) => {
+        if (e.key === " ") setPressed(false);
+      }}
+      onBlur={() => setPressed(false)}
       onPointerMove={(e) => {
         // Touch would fight the page scroll, so leaning is for mouse and pen.
         if (reduceMotion || e.pointerType === "touch") return;
@@ -118,6 +150,7 @@ export function FlipCard({
       onPointerLeave={() => {
         pointerX.set(0);
         pointerY.set(0);
+        setPressed(false);
       }}
     >
       <motion.div
@@ -128,7 +161,7 @@ export function FlipCard({
       <div className="absolute inset-0 perspective-[1200px]">
         <motion.div
           className="relative size-full transform-3d"
-          style={{ transform: reduceMotion ? "none" : transform }}
+          style={{ transform: reduceMotion ? pressTransform : transform }}
         >
           <div
             className={cn(
