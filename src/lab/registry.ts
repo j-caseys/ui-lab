@@ -1635,7 +1635,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "card-number-reveal",
-    isNew: true,
     name: "Card number reveal",
     category: "data",
     description:
@@ -1693,6 +1692,16 @@ export const lab: LabEntry[] = [
     keywords: "push button skeuomorphic latch switch toggle power physical plastic",
     previewScale: 1.05,
     credit: { name: "Petr Knoll", url: "https://x.com/iampetrknoll" },
+  },
+  {
+    slug: "qr-reveal",
+    isNew: true,
+    name: "QR reveal",
+    category: "cards",
+    description: "The code leaves the button as a cloud of ink dust that billows up and settles, grain by grain, into a QR you can scan.",
+    keywords: "qr code reveal particles dust share scan link canvas",
+    previewScale: 0.55,
+    credit: { name: "bakai", url: "https://x.com/samakov0" },
   },
   // new-component:entries
 ];

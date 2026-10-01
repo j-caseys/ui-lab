@@ -203,6 +203,7 @@ const demos: Record<string, ComponentType> = {
   "sidebar-submenu": dynamic(() => import("./components/sidebar-submenu")),
   "floating-action-menu": dynamic(() => import("./components/floating-action-menu")),
   "push-lock-button": dynamic(() => import("./components/push-lock-button")),
+  "qr-reveal": dynamic(() => import("./components/qr-reveal")),
   // new-component:entries
 };
 
