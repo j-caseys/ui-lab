@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { useSyncExternalStore } from "react";
+import { motion } from "motion/react";
+import { CopyButton } from "@/lab/components/copy-button";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 import { cn } from "@/lib/cn";
 
@@ -46,39 +47,15 @@ function saveRunner(runner: Runner) {
   window.dispatchEvent(new Event(CHANGED));
 }
 
-const ICON = {
-  initial: { opacity: 0, scale: 0.5, filter: "blur(2px)" },
-  animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-  exit: { opacity: 0, scale: 0.5, filter: "blur(2px)" },
-};
-
 export function InstallCommand({ url }: { url: string }) {
   const reduceMotion = useReducedMotion();
   // npm on the server and during hydration, the saved choice right after.
   const runner = useSyncExternalStore<Runner>(subscribe, readRunner, () => "npm");
   const command = `${RUNNERS[runner]} ${url}`;
-  const [copied, setCopied] = useState(false);
-  const reset = useRef<ReturnType<typeof setTimeout>>(undefined);
-
-  useEffect(() => () => clearTimeout(reset.current), []);
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(command);
-    } catch {
-      return;
-    }
-    setCopied(true);
-    clearTimeout(reset.current);
-    reset.current = setTimeout(() => setCopied(false), 1600);
-  };
 
   return (
-    <section
-      aria-labelledby="install-heading"
-      className="rounded-2xl border border-border bg-surface/60 p-1.5"
-    >
-      <div className="flex items-center justify-between gap-3 py-1 pr-1 pl-3">
+    <section aria-labelledby="install-heading">
+      <div className="flex items-center justify-between gap-3 pl-1">
         <h2 id="install-heading" className="text-[13px] font-medium">
           Install
         </h2>
@@ -119,50 +96,19 @@ export function InstallCommand({ url }: { url: string }) {
           })}
         </div>
       </div>
-      <div className="mt-1.5 flex items-center gap-1 rounded-xl bg-background p-1 pl-3.5 shadow-raised">
-        {/* Long URLs scroll sideways inside the box rather than wrapping,
+      {/* The lab's own copy button, in the pill it was made for. 44px with
+          6px around the 32px button keeps the radii concentric. */}
+      <div className="mt-1.5 flex h-11 items-center gap-2 rounded-full bg-surface pr-1.5 pl-4 shadow-raised">
+        {/* Long URLs scroll sideways inside the pill rather than wrapping,
             and fade at the edge so a cut-off reads as "more this way". */}
-        <code className="min-w-0 flex-1 overflow-x-auto py-2 font-mono text-[13px] whitespace-nowrap [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <code className="min-w-0 flex-1 overflow-x-auto font-mono text-[13px] whitespace-nowrap [mask-image:linear-gradient(to_right,black_calc(100%-24px),transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <span aria-hidden className="text-muted select-none">
             ${" "}
           </span>
           {command}
         </code>
-        <button
-          type="button"
-          onClick={copy}
-          aria-label={copied ? "Copied" : "Copy install command"}
-          className="relative grid size-9 shrink-0 place-items-center rounded-lg text-muted outline-hidden transition-[color,background-color,scale] duration-150 ease-out hover:bg-surface hover:text-foreground focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-foreground active:scale-[0.92]"
-        >
-          <AnimatePresence initial={false} mode="popLayout">
-            <motion.svg
-              key={copied ? "check" : "copy"}
-              viewBox="0 0 16 16"
-              className="size-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.5}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden
-              {...(reduceMotion ? {} : ICON)}
-              transition={{ duration: 0.15, ease: [0.23, 1, 0.32, 1] }}
-            >
-              {copied ? (
-                <path d="m3.5 8.5 3 3 6-7" />
-              ) : (
-                <>
-                  <rect x="5.25" y="5.25" width="8" height="8" rx="2" />
-                  <path d="M10.75 3.25a2 2 0 0 0-2-1h-4.5a2 2 0 0 0-2 2v4.5a2 2 0 0 0 1 2" />
-                </>
-              )}
-            </motion.svg>
-          </AnimatePresence>
-        </button>
+        <CopyButton value={command} label="Copy install command" className="shrink-0" />
       </div>
-      <p aria-live="polite" className="sr-only">
-        {copied ? "Install command copied" : ""}
-      </p>
     </section>
   );
 }
