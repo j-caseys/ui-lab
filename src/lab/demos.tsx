@@ -202,6 +202,7 @@ const demos: Record<string, ComponentType> = {
   "payment-card": dynamic(() => import("./components/payment-card")),
   "sidebar-submenu": dynamic(() => import("./components/sidebar-submenu")),
   "floating-action-menu": dynamic(() => import("./components/floating-action-menu")),
+  "push-lock-button": dynamic(() => import("./components/push-lock-button")),
   // new-component:entries
 };
 

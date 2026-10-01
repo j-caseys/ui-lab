@@ -1627,7 +1627,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "signature-pad",
-    isNew: true,
     name: "Signature pad",
     category: "inputs",
     description: "Ink that swells where you slow down, and wipes away the way you wrote it.",
@@ -1684,6 +1683,16 @@ export const lab: LabEntry[] = [
     keywords: "fab floating action button menu speed dial wallet actions",
     previewScale: 0.35,
     credit: { name: "Nick Pyl", url: "https://x.com/nickpylll" },
+  },
+  {
+    slug: "push-lock-button",
+    isNew: true,
+    name: "Push-lock button",
+    category: "buttons",
+    description: "Bottoms out while you hold it, catches halfway when you let go and lights the lamp, and springs back on the next press.",
+    keywords: "push button skeuomorphic latch switch toggle power physical plastic",
+    previewScale: 1.05,
+    credit: { name: "Petr Knoll", url: "https://x.com/iampetrknoll" },
   },
   // new-component:entries
 ];
