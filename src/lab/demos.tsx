@@ -204,10 +204,13 @@ const demos: Record<string, ComponentType> = {
   "floating-action-menu": dynamic(() => import("./components/floating-action-menu")),
   "push-lock-button": dynamic(() => import("./components/push-lock-button")),
   "qr-reveal": dynamic(() => import("./components/qr-reveal")),
+  "wallet-cards": dynamic(() => import("./components/wallet-cards")),
   "clock-field": dynamic(() => import("./components/clock-field")),
   "x-walkers": dynamic(() => import("./components/x-walkers")),
   "glass-lens": dynamic(() => import("./components/glass-lens")),
   "orbit-gallery": dynamic(() => import("./components/orbit-gallery")),
+  "binary-year": dynamic(() => import("./components/binary-year")),
+  "gooey-menu": dynamic(() => import("./components/gooey-menu")),
   // new-component:entries
 };
 

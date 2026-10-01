@@ -18,11 +18,13 @@ const COUNT = 17;
 // How many X's the field starts with, and the most it will hold.
 const START = 22;
 const MOST = 60;
-// One step: long enough to see the reach, the slide and the pull.
-const STEP = 0.95;
-// How long an X rests between steps, at least and at most, in seconds.
-const REST_MIN = 0.5;
-const REST_MAX = 3.2;
+// One step: brisk, a scurry rather than a stroll, but still long enough
+// to catch the reach and the pull.
+const STEP = 0.48;
+// How long an X rests between steps, at least and at most, in seconds:
+// short, so the field is always busy somewhere.
+const REST_MIN = 0.12;
+const REST_MAX = 1.1;
 // An arm sets off this far through a step: leading arms at 0, trailing
 // arms at LAG. Each arm then takes the rest of the step to arrive.
 const LAG = 0.3;

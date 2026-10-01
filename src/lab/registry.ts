@@ -1681,7 +1681,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "push-lock-button",
-    isNew: true,
     name: "Push-lock button",
     category: "buttons",
     description: "Bottoms out while you hold it, catches halfway when you let go and lights the lamp, and springs back on the next press.",
@@ -1691,7 +1690,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "qr-reveal",
-    isNew: true,
     name: "QR reveal",
     category: "cards",
     description: "The code leaves the button as a cloud of ink dust that billows up and settles, grain by grain, into a QR you can scan.",
@@ -1700,8 +1698,18 @@ export const lab: LabEntry[] = [
     credit: { name: "bakai", url: "https://x.com/samakov0" },
   },
   {
-    slug: "clock-field",
+    slug: "wallet-cards",
     isNew: true,
+    name: "Wallet cards",
+    category: "cards",
+    description: "Tap the cards peeking out of the home screen and the front one lifts into a carousel as the page changes around it; close it and it drops back into the stack.",
+    keywords: "wallet card carousel stack shared layout fintech bank payment",
+    previewScale: 0.42,
+    previewCrop: true,
+    credit: { name: "Benji Taylor", url: "https://x.com/benjitaylor" },
+  },
+  {
+    slug: "clock-field",
     name: "Clock field",
     category: "playground",
     description: "A field of clocks whose hands turn as one, melting between a wave, a vortex, rings and a funnel; they look at your pointer, and a click sends a ripple through them.",
@@ -1738,6 +1746,26 @@ export const lab: LabEntry[] = [
     keywords: "gallery orbit ring photos portfolio carousel hover expand images",
     previewScale: 0.5,
     credit: { name: "Gionatannese", url: "https://x.com/gionatannese" },
+  },
+  {
+    slug: "binary-year",
+    isNew: true,
+    name: "Binary year",
+    category: "text",
+    description: "A year written in binary; reach for it and a wave runs in from the right, the leading digits fade to zeros and the year you know types itself in.",
+    keywords: "binary year easter egg scramble decode number footer typography",
+    previewScale: 1.05,
+    credit: { name: "George", url: "https://x.com/vanjek" },
+  },
+  {
+    slug: "gooey-menu",
+    isNew: true,
+    name: "Gooey menu",
+    category: "buttons",
+    description: "One small button that opens three ways, all made of the same liquid: a menu that pulls free, a button that swells into one, and a dial that bubbles out.",
+    keywords: "gooey liquid metaball menu dropdown speed dial fab morph",
+    previewScale: 0.56,
+    credit: { name: "Arek", url: "https://x.com/arknow91" },
   },
   // new-component:entries
 ];
