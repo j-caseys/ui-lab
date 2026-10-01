@@ -205,6 +205,9 @@ const demos: Record<string, ComponentType> = {
   "push-lock-button": dynamic(() => import("./components/push-lock-button")),
   "qr-reveal": dynamic(() => import("./components/qr-reveal")),
   "clock-field": dynamic(() => import("./components/clock-field")),
+  "x-walkers": dynamic(() => import("./components/x-walkers")),
+  "glass-lens": dynamic(() => import("./components/glass-lens")),
+  "orbit-gallery": dynamic(() => import("./components/orbit-gallery")),
   // new-component:entries
 };
 

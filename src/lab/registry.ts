@@ -1654,7 +1654,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "payment-card",
-    isNew: true,
     name: "Payment card",
     category: "inputs",
     description: "Floods with the card network's colours from the corner the moment the first digits give it away.",
@@ -1664,7 +1663,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "sidebar-submenu",
-    isNew: true,
     name: "Sidebar sub-menu",
     category: "navigation",
     description: "Opens one section at a time and lights the branch from the title down to the item you are on.",
@@ -1674,7 +1672,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "floating-action-menu",
-    isNew: true,
     name: "Floating action menu",
     category: "buttons",
     description: "The plus folds away and its actions unfold upward out of the spot it sat in, over a frosted screen.",
@@ -1711,6 +1708,36 @@ export const lab: LabEntry[] = [
     keywords: "clock grid hands wave illusion optical vortex generative canvas",
     previewScale: 0.45,
     credit: { name: "A. L. Crego", url: "https://x.com/alcrego_" },
+  },
+  {
+    slug: "x-walkers",
+    isNew: true,
+    name: "X walkers",
+    category: "playground",
+    description: "X marks crawl across a field of dots, reaching their arms to the next dot and dragging themselves over; they keep away from your pointer, and a click sets down a new one.",
+    keywords: "grid dots crawl generative creatures canvas pattern playful",
+    previewScale: 0.45,
+    credit: { name: "Okazz", url: "https://x.com/okazz_" },
+  },
+  {
+    slug: "glass-lens",
+    isNew: true,
+    name: "Glass lens",
+    category: "text",
+    description: "A ball of glass rides over the words and magnifies whatever it passes; press and the whole paragraph shivers and flushes indigo.",
+    keywords: "lens magnifier cursor glass chrome text distortion serif portfolio",
+    previewScale: 0.55,
+    credit: { name: "Gionatannese", url: "https://x.com/gionatannese" },
+  },
+  {
+    slug: "orbit-gallery",
+    isNew: true,
+    name: "Orbit gallery",
+    category: "cards",
+    description: "Small photographs turn slowly round a name; hover one and the ring stops and makes room, click it and it grows into the middle while the rest bloom outward.",
+    keywords: "gallery orbit ring photos portfolio carousel hover expand images",
+    previewScale: 0.5,
+    credit: { name: "Gionatannese", url: "https://x.com/gionatannese" },
   },
   // new-component:entries
 ];
