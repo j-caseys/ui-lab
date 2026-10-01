@@ -22,6 +22,7 @@ Stack: Next.js 16 App Router (read `node_modules/next/dist/docs/` before using a
 4. **Build it** (rules below). Export the reusable component by name with sensible props, and `export default function <Name>Demo()` with believable, real content.
 5. **Verify visually** (see "Seeing it"): light and dark, mid-animation frames, 375px width, console clean, reduced motion.
 6. **Register:** `bun scripts/register.ts '[{"slug":"x","description":"...","keywords":"..."}]'`. Description: one short present-tense line about what it *does* ("Leans toward your cursor before you even reach it."). Keywords: 4 to 8 lowercase search words. Add `"anchor":"top"` if the demo grows downward.
+   **Credit:** when the idea is someone else's (Yash sends a reference with its maker), add `credit: { name: "...", url: "https://x.com/..." }` to the entry; the page shows "Inspired by" with a link. Also open the component file with a one-line comment naming them and what the idea is. Rebuild it in the lab's style rather than copying it, and adjust what doesn't fit (a card number must never reveal on hover just because a reference did).
 7. **Fit its card:** measure the demo's rendered size at 1440px, then `bun scripts/set-scale.ts '{"slug":[w,h,max?]}'` (fits into 316x200; `max` like 1.6 lets tiny controls grow). Very tall demos can use `previewCrop: true`. Then look at the card on the index, at rest and hovered.
 8. **Hover show:** add a short hover demonstration for the index card (see "Card previews"). If the component has nothing meaningful to show, add nothing.
 9. `bunx eslint <file>`, `bunx tsc --noEmit`, `bun run build`. Commit only when asked (single-line message, no Co-Authored-By trailer).
@@ -59,7 +60,18 @@ Helper scripts live in `scripts/` (not the scratchpad, which gets wiped): `new-c
 - **Sizing:** build at full-page size (composites roughly 360 to 560px wide, body text 14 to 15px, nothing under 12px, controls 36 to 44px), `max-w-full` so nothing widens a 375px screen. Never shrink a component to fit a card; the card scales it.
 - **Positioned children stay inside:** an absolutely positioned or `sr-only` element inside a demo's own scroll box escapes to the page unless an ancestor is positioned. `sr-only` on a `<table>` doesn't collapse; wrap it in a div.
 - **Comments:** sparse, why-only, every magic number explained. No em dashes anywhere, in code or UI text.
-- **Components stand alone:** never import from another component file.
+- **Components stand alone:** never import from another component file. Each one ships alone through the install registry (below).
+- **Safari and 3D:** never put a CSS `scale` or transform transition on an ancestor of a `transform-3d` (preserve-3d) element. WebKit flattens it into an opaque square for the whole transition. Put the press scale inside the same transform as the 3D rotation (see flip-card).
+- **ResizeObserver fires once on `observe()`.** If its callback snaps something into place, it will cancel the animation you just started; compare against the last size and only act on a real change.
+
+## Install registry and agent skill
+
+Every experiment installs with `npx shadcn@latest add https://lab.xevrion.dev/r/<slug>.json` (the Install box under each experiment's description). The JSON is built at build time from the component file by `src/app/r/[name]/route.ts` and `src/lib/registry-item.ts`, so nothing is hand-maintained, but two things matter when writing a component:
+
+- **Imports:** only `react`, `react-dom`, `next/*`, npm packages and the helpers listed in `LOCAL` in `registry-item.ts` (`@/lib/cn`, `@/lib/use-reduced-motion`, `@/lab/preview-play`, `@/lib/signature`, `@/lab/data/contributions.json`). Any other `@/` import makes the build throw; give it a home in `LOCAL` first. npm packages are picked up as dependencies automatically.
+- **Tokens:** on the way out, `muted` becomes shadcn's `muted-foreground`, `surface` becomes `muted` and `danger` becomes `destructive`, for both utilities and `var(--x)`. Site-only tokens (`marker`, `shadow-raised`, `shadow-wheel`, `focus-ring`) are added to the installer's CSS by `EXTRA_VARS`. A new site token needs an entry there too.
+
+`/r/registry.json` lists everything. The `@xevrion` namespace is proposed to shadcn's directory (shadcn-ui/ui#12093); once merged, `npx shadcn@latest add @xevrion/<slug>` works and the Install box, README, `llms.txt` and skill should switch to it. The agent skill lives in `skills/ui-lab/SKILL.md` (`npx skills add xevrion/ui-lab`); keep it in step if install steps change.
 
 ## Card previews
 

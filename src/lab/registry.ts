@@ -39,6 +39,8 @@ export type LabEntry = {
   // The latest batch: listed first on the index and circled as new. Clear
   // these when the next batch lands, so "new" keeps meaning something.
   isNew?: true;
+  // Someone else's idea, rebuilt here: their name links back on the page.
+  credit?: { name: string; url: string };
 };
 
 export const lab: LabEntry[] = [
@@ -1665,6 +1667,37 @@ export const lab: LabEntry[] = [
     description: "Ink that swells where you slow down, and wipes away the way you wrote it.",
     keywords: "signature sign draw pen ink canvas pad handwriting form",
     previewScale: 0.65,
+  },
+  {
+    slug: "card-number-reveal",
+    isNew: true,
+    name: "Card number reveal",
+    category: "data",
+    description:
+      "Rolls the hidden digits in when you press the eye, then hides them again when the ring runs out.",
+    keywords: "card number mask reveal copy clipboard countdown privacy",
+    previewScale: 0.95,
+    credit: { name: "Nitish Khagwal", url: "https://x.com/nitishkmrk" },
+  },
+  {
+    slug: "sidebar-highlight",
+    isNew: true,
+    name: "Sidebar highlight",
+    category: "navigation",
+    description: "A dot travels to whatever you pick and takes on its section colour, which then wipes across the label.",
+    keywords: "sidebar nav active state dot indicator docs menu sections",
+    previewCrop: true,
+    credit: { name: "Gustavo", url: "https://x.com/heyimgustavo" },
+  },
+  {
+    slug: "payment-card",
+    isNew: true,
+    name: "Payment card",
+    category: "inputs",
+    description: "Floods with the card network's colours from the corner the moment the first digits give it away.",
+    keywords: "payment checkout credit card brand visa mastercard stripe flood",
+    previewScale: 0.5,
+    credit: { name: "Adam Whitcroft", url: "https://x.com/adamwhitcroft" },
   },
   // new-component:entries
 ];

@@ -189,6 +189,9 @@ import StorageMeterDemo from "./components/storage-meter";
 import StatusPickerDemo from "./components/status-picker";
 import MoodSliderDemo from "./components/mood-slider";
 import SignaturePadDemo from "./components/signature-pad";
+import CardNumberRevealDemo from "./components/card-number-reveal";
+import SidebarHighlightDemo from "./components/sidebar-highlight";
+import PaymentCardDemo from "./components/payment-card";
 // new-component:imports
 
 // The index shows every demo at once, so one static bundle beats 27 separate
@@ -384,5 +387,8 @@ export const previews: Record<string, ComponentType> = {
   "status-picker": StatusPickerDemo,
   "mood-slider": MoodSliderDemo,
   "signature-pad": SignaturePadDemo,
+  "card-number-reveal": CardNumberRevealDemo,
+  "sidebar-highlight": SidebarHighlightDemo,
+  "payment-card": PaymentCardDemo,
   // new-component:entries
 };

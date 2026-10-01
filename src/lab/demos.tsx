@@ -197,6 +197,9 @@ const demos: Record<string, ComponentType> = {
   "status-picker": dynamic(() => import("./components/status-picker")),
   "mood-slider": dynamic(() => import("./components/mood-slider")),
   "signature-pad": dynamic(() => import("./components/signature-pad")),
+  "card-number-reveal": dynamic(() => import("./components/card-number-reveal")),
+  "sidebar-highlight": dynamic(() => import("./components/sidebar-highlight")),
+  "payment-card": dynamic(() => import("./components/payment-card")),
   // new-component:entries
 };
 

@@ -139,6 +139,23 @@ export default async function LabPage({ params }: PageProps<"/lab/[slug]">) {
             <p className="mt-2 max-w-xl text-[15px] text-pretty text-muted">
               {entry.description}
             </p>
+            {entry.credit && (
+              <p className="mt-1.5 text-sm text-muted">
+                Inspired by{" "}
+                <a
+                  href={entry.credit.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group/credit inline-flex items-center gap-0.5 rounded-sm font-medium text-foreground outline-hidden underline decoration-border underline-offset-4 transition-[text-decoration-color] duration-150 ease-out hover:decoration-foreground focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-foreground"
+                >
+                  {entry.credit.name}
+                  <Arrow
+                    direction="up-right"
+                    className="size-3 transition-[translate] duration-150 ease-out group-hover/credit:translate-x-0.5 group-hover/credit:-translate-y-0.5 motion-reduce:transition-none"
+                  />
+                </a>
+              </p>
+            )}
             <Link
               href={`/?c=${entry.category}`}
               prefetch={false}
