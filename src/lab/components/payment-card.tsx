@@ -147,11 +147,26 @@ const SUBTOTAL = ITEMS.reduce((sum, [, price]) => sum + price, 0);
 const TAX = Math.round(SUBTOTAL * 0.08 * 100) / 100;
 const TOTAL = SUBTOTAL + TAX;
 
+// Random digits rarely match a network, so the flood would go unseen. These
+// are the networks' published test numbers, typed in for you on a tap.
+const SAMPLES = [
+  { label: "Visa", number: "4111111111111111" },
+  { label: "Mastercard", number: "5555555555554444" },
+  { label: "Amex", number: "378282246310005" },
+  // Starts as Visa and floods to Stripe at the fourth digit.
+  { label: "Stripe test", number: "4242424242424242" },
+] as const;
+// Quick enough not to keep anyone waiting, slow enough to read as typing.
+const TYPE_EVERY = 55;
+
 export function PaymentCard({
   cardholder = "Yash B",
+  samples = true,
   className,
 }: {
   cardholder?: string;
+  // The row of test cards under the button.
+  samples?: boolean;
   className?: string;
 }) {
   const reduceMotion = useReducedMotion();
@@ -189,20 +204,43 @@ export function PaymentCard({
   // The rim only exists while the edge is moving.
   const rimOpacity = useTransform(progress, [0, 0.05, 0.8, 1], [0, 1, 1, 0]);
 
+  // The brand whose colour is in the clipped layer right now, including one
+  // that is still pulling back.
+  const overBrand = useRef<Brand | null>(null);
+  const flow = useRef<ReturnType<typeof animate>>(undefined);
+
   const repaint = (next: Brand | null) => {
     const previous = shownBrand.current;
     if (next === previous) return;
     shownBrand.current = next;
-    if (next) {
-      setLayers({ under: previous, over: next });
-      progress.jump(0);
-      if (reduceMotion) progress.jump(1);
-      else animate(progress, 1, FLOOD);
-    } else {
+    flow.current?.stop();
+    const run = (to: 0 | 1, how: typeof FLOOD | typeof RETREAT) => {
+      if (reduceMotion) progress.jump(to);
+      else flow.current = animate(progress, to, how);
+    };
+    if (!next) {
       setLayers((l) => ({ under: null, over: l.over }));
-      if (reduceMotion) progress.jump(0);
-      else animate(progress, 0, RETREAT);
+      run(0, RETREAT);
+      return;
     }
+    if (!previous && overBrand.current === next && progress.get() > 0) {
+      // Typed again while the same colour was pulling back: it turns round
+      // from where it is instead of starting over.
+      run(1, FLOOD);
+      return;
+    }
+    if (!previous && progress.get() > 0) {
+      // A different network mid-retreat: carry on from the current edge so
+      // the card never blinks back to plain.
+      overBrand.current = next;
+      setLayers({ under: null, over: next });
+      run(1, FLOOD);
+      return;
+    }
+    overBrand.current = next;
+    setLayers({ under: previous, over: next });
+    progress.jump(0);
+    run(1, FLOOD);
   };
 
   const typeNumber = (raw: string) => {
@@ -212,6 +250,40 @@ export function PaymentCard({
     setNumber(format(trimmed, nextBrand));
     setPaid(false);
     repaint(nextBrand);
+  };
+
+  // A tapped test card types itself in a digit at a time, so the flood
+  // happens the way it would for someone typing, then fills the rest so Pay
+  // wakes up too.
+  const [trying, setTrying] = useState<string | null>(null);
+  const typing = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const stopTyping = () => {
+    typing.current.forEach(clearTimeout);
+    typing.current = [];
+  };
+  useEffect(() => stopTyping, []);
+
+  const tryCard = (sample: (typeof SAMPLES)[number]) => {
+    stopTyping();
+    setTrying(sample.label);
+    // The first digit replaces whatever was there, so the new colour floods
+    // straight over the old one rather than the card going plain between.
+    setExpiry("");
+    setCvc("");
+    const step = reduceMotion ? 0 : TYPE_EVERY;
+    // Starts with two digits at once: one alone ("3") doesn't name a network
+    // yet, and the colour would start backing out before the second lands.
+    for (let i = 2; i <= sample.number.length; i++) {
+      typing.current.push(
+        setTimeout(() => typeNumber(sample.number.slice(0, i)), step * (i - 2)),
+      );
+    }
+    typing.current.push(
+      setTimeout(() => {
+        setExpiry("12 / 28");
+        setCvc(detect(sample.number) === "amex" ? "1234" : "123");
+      }, step * (sample.number.length + 2)),
+    );
   };
 
   // Spaces are added as you type, so the caret is put back after the same
@@ -302,15 +374,20 @@ export function PaymentCard({
       </div>
 
       <div className="relative">
-        {/* Takes on the network's colour as a soft light under the card. */}
-        <div
-          aria-hidden
-          className="absolute inset-x-6 top-6 -bottom-2 rounded-[24px] blur-2xl transition-[background-color,opacity] duration-500 ease-out"
-          style={{
-            backgroundColor: spec?.glow ?? "transparent",
-            opacity: flooded ? 1 : 0,
-          }}
-        />
+        {/* The network's colour as a soft light under the card: one light
+            per network, so switching fades one out and the next in rather
+            than dragging a red through purple to a blue. */}
+        {ORDER.map((b) => (
+          <div
+            key={b}
+            aria-hidden
+            className="absolute inset-x-6 top-6 -bottom-2 rounded-[24px] blur-2xl transition-[opacity] duration-500 ease-out"
+            style={{
+              backgroundColor: BRANDS[b].glow,
+              opacity: brand === b ? 1 : 0,
+            }}
+          />
+        ))}
         <div
           ref={cardRef}
           className="relative isolate h-[196px] overflow-hidden rounded-[18px] bg-background shadow-raised"
@@ -400,6 +477,8 @@ export function PaymentCard({
               onChange={(e) => {
                 const at = e.target.selectionStart ?? e.target.value.length;
                 caret.current = e.target.value.slice(0, at).replace(/\D/g, "").length;
+                stopTyping();
+                setTrying(null);
                 typeNumber(e.target.value);
               }}
               inputMode="numeric"
@@ -474,6 +553,32 @@ export function PaymentCard({
           </motion.span>
         </AnimatePresence>
       </button>
+
+      {samples && play === null && (
+        <div className="flex flex-wrap items-center justify-center gap-1 pt-1 text-[12px]">
+          <span className="mr-1 text-muted">Try</span>
+          {SAMPLES.map((sample) => {
+            const on = trying === sample.label;
+            return (
+              <button
+                key={sample.label}
+                type="button"
+                aria-pressed={on}
+                aria-label={`Fill in a sample ${sample.label} card`}
+                onClick={() => tryCard(sample)}
+                className={cn(
+                  "h-7 touch-manipulation rounded-full px-2.5 font-medium outline-hidden transition-[background-color,color,scale] duration-150 ease-out focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-1 focus-visible:outline-foreground active:scale-[0.96] motion-reduce:transition-[background-color,color]",
+                  on
+                    ? "bg-foreground text-background"
+                    : "bg-surface text-muted hover:bg-foreground/10 hover:text-foreground",
+                )}
+              >
+                {sample.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <p className="sr-only" aria-live="polite">
         {paid ? "Paid" : spec ? spec.name : ""}
