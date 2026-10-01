@@ -1353,7 +1353,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "word-rotator",
-    isNew: true,
     name: "Word rotator",
     category: "text",
     description: "Keeps the letters two words share and glides them into place as the rest trade out.",
@@ -1362,7 +1361,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "keycap-hint",
-    isNew: true,
     name: "Keycap hint",
     category: "navigation",
     description: "Keycaps that sink when you press the real keys.",
@@ -1371,7 +1369,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "caps-lock-warning",
-    isNew: true,
     name: "Caps lock warning",
     category: "inputs",
     description: "A small caps lock key with its light on slides into the field when caps is on.",
@@ -1380,7 +1377,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "eye-toggle",
-    isNew: true,
     name: "Eye toggle",
     category: "inputs",
     description: "The eye shuts when your password is hidden and watches while you type.",
@@ -1389,7 +1385,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "relative-time",
-    isNew: true,
     name: "Relative time",
     category: "text",
     description: "Says \"4 min ago\" and changes only at the moment the words would change.",
@@ -1398,7 +1393,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "copy-email",
-    isNew: true,
     name: "Copy email",
     category: "text",
     description: "Click the address and its letters flip, one by one, into \"Copied to clipboard\".",
@@ -1407,7 +1401,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "directional-underline",
-    isNew: true,
     name: "Directional underline",
     category: "text",
     description: "The underline comes in from the side your cursor entered and leaves toward the side it left.",
@@ -1416,7 +1409,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "hover-preview-link",
-    isNew: true,
     name: "Hover preview link",
     category: "text",
     description: "Hover a link to get a preview card that trails your cursor and leans as it moves.",
@@ -1425,7 +1417,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "scribble-checkbox",
-    isNew: true,
     name: "Scribble checkbox",
     category: "inputs",
     description: "Checks itself off with a quick pen stroke and strikes the words through.",
@@ -1434,7 +1425,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "focus-paragraph",
-    isNew: true,
     name: "Focus paragraph",
     category: "text",
     description: "Brings the sentence you're reading forward and lets the rest step back.",
@@ -1443,7 +1433,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "text-progress",
-    isNew: true,
     name: "Text progress",
     category: "text",
     description: "Fills the label itself with ink as the upload runs.",
@@ -1452,7 +1441,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "spoiler-text",
-    isNew: true,
     name: "Spoiler text",
     category: "text",
     description: "Hides a spoiler under shimmering grain that blows away from your click.",
@@ -1461,7 +1449,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "badge-counter",
-    isNew: true,
     name: "Badge counter",
     category: "feedback",
     description: "Rolls its digits the way the count moved and bumps each time it changes.",
@@ -1470,7 +1457,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "star-button",
-    isNew: true,
     name: "Star button",
     category: "buttons",
     description: "Spins once and throws off tiny sparks when starred, then rolls the count.",
@@ -1479,7 +1465,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "follow-button",
-    isNew: true,
     name: "Follow button",
     category: "buttons",
     description: "Turns its plus into a check as you follow, and warns before you unfollow.",
@@ -1488,7 +1473,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "live-indicator",
-    isNew: true,
     name: "Live indicator",
     category: "feedback",
     description: "Breathes while live, lets the viewer count drift, and blinks hollow while reconnecting.",
@@ -1497,7 +1481,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "mini-clock",
-    isNew: true,
     name: "Mini clock",
     category: "data",
     description: "A tiny analog clock that sweeps in its city's time and turns dark after sundown.",
@@ -1506,7 +1489,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "pixel-loader",
-    isNew: true,
     name: "Pixel loader",
     category: "feedback",
     description: "A tiny pixel grid that cycles spiral, snake, pulse and checker, then draws a check when done.",
@@ -1515,7 +1497,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "greeting",
-    isNew: true,
     name: "Greeting",
     category: "text",
     description: "Greets by time of day, with a sun or moon that rises into place along an arc.",
@@ -1524,7 +1505,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "arrow-callout",
-    isNew: true,
     name: "Arrow callout",
     category: "cards",
     description: "A handwritten note whose arrow draws itself to whatever it points at.",
@@ -1533,7 +1513,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "voice-orb",
-    isNew: true,
     name: "Voice orb",
     category: "cards",
     description:
@@ -1543,7 +1522,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "call-widget",
-    isNew: true,
     name: "Call widget",
     category: "feedback",
     description: "Accept turns into hang-up as the call controls unfold out of it, one by one.",
@@ -1552,7 +1530,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "logo-orbit",
-    isNew: true,
     name: "Logo orbit",
     category: "cards",
     description: "Logos orbit a heading on tilted rings, passing behind it, and brake to a stop when you point.",
@@ -1561,7 +1538,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "now-playing",
-    isNew: true,
     name: "Now playing",
     category: "cards",
     description: "A listening-to pill whose record slides out from behind the cover and spins while it plays.",
@@ -1570,7 +1546,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "uptime-bar",
-    isNew: true,
     name: "Uptime bar",
     category: "data",
     description:
@@ -1580,7 +1555,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "helpful-prompt",
-    isNew: true,
     name: "Helpful prompt",
     category: "feedback",
     description: "Asks if the page helped, and on a no opens into a field right where the question was.",
@@ -1589,7 +1563,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "back-to-top",
-    isNew: true,
     name: "Back to top",
     category: "navigation",
     description: "Fills its ring as you read, and when you press it the arrow lifts off while the page glides back up.",
@@ -1598,7 +1571,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "share-button",
-    isNew: true,
     name: "Share button",
     category: "buttons",
     description: "Opens in place into copy, X and email, and the link turns into a check when it is copied.",
@@ -1607,7 +1579,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "autosave-status",
-    isNew: true,
     name: "Autosave status",
     category: "feedback",
     description: "A dot for unsaved changes splits into three while saving, then gathers into a check.",
@@ -1616,7 +1587,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "reactions",
-    isNew: true,
     name: "Reactions",
     category: "cards",
     description: "Tap a reaction to add yours, or pick one and watch it fly into its pill as the count rolls.",
@@ -1625,7 +1595,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "shortcut-recorder",
-    isNew: true,
     name: "Shortcut recorder",
     category: "inputs",
     description: "Press keys to set a shortcut: keycaps appear as you hold them, and it tells you when a combo is taken.",
@@ -1634,7 +1603,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "storage-meter",
-    isNew: true,
     name: "Storage meter",
     category: "data",
     description: "Point at any slice to read its size, then clear the cache and watch the total count down.",
@@ -1643,7 +1611,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "status-picker",
-    isNew: true,
     name: "Status picker",
     category: "inputs",
     description: "Pick a status and the badge on your avatar turns into its shape: a dot, a moon, a stop sign or a ring.",
@@ -1652,7 +1619,6 @@ export const lab: LabEntry[] = [
   },
   {
     slug: "mood-slider",
-    isNew: true,
     name: "Mood slider",
     category: "inputs",
     description: "The thumb is a face that frowns, grins and leans into the drag as you rate your day.",
@@ -1708,6 +1674,16 @@ export const lab: LabEntry[] = [
     keywords: "sidebar submenu tree nav accordion connector active branch",
     previewScale: 0.65,
     credit: { name: "Pranav Patel", url: "https://x.com/thatspranav" },
+  },
+  {
+    slug: "floating-action-menu",
+    isNew: true,
+    name: "Floating action menu",
+    category: "buttons",
+    description: "The plus folds away and its actions unfold upward out of the spot it sat in, over a frosted screen.",
+    keywords: "fab floating action button menu speed dial wallet actions",
+    previewScale: 0.35,
+    credit: { name: "Nick Pyl", url: "https://x.com/nickpylll" },
   },
   // new-component:entries
 ];

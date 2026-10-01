@@ -201,6 +201,7 @@ const demos: Record<string, ComponentType> = {
   "sidebar-highlight": dynamic(() => import("./components/sidebar-highlight")),
   "payment-card": dynamic(() => import("./components/payment-card")),
   "sidebar-submenu": dynamic(() => import("./components/sidebar-submenu")),
+  "floating-action-menu": dynamic(() => import("./components/floating-action-menu")),
   // new-component:entries
 };
 

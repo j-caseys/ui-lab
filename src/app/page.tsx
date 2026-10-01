@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { siGithub } from "simple-icons";
 import { JsonLd } from "@/components/json-ld";
+import { JustMade } from "@/components/just-made";
 import { LabCard } from "@/components/lab-card";
 import { Arrow } from "@/components/arrow";
 import { LabSearch } from "@/components/lab-search";
@@ -23,6 +24,8 @@ const rank = (e: (typeof lab)[number]) =>
 const shown = [...lab].sort((a, b) => rank(a) - rank(b));
 // The registry appends, so the last flagged entry is the newest.
 const latest = lab.findLast((e) => e.isNew) ?? lab[lab.length - 1];
+// The reel above the grid, newest first.
+const fresh = lab.filter((e) => e.isNew).reverse().slice(0, 6);
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -129,6 +132,26 @@ export default function Home() {
             </a>
           </div>
         </section>
+        {fresh.length > 1 && (
+          <JustMade
+            items={fresh.map((e) => {
+              const Preview = previews[e.slug];
+              return {
+                slug: e.slug,
+                name: e.name,
+                description: e.description,
+                category:
+                  categories.find((c) => c.id === e.category)?.label ?? "",
+                credit: e.credit?.name,
+                // The stage is half as tall again as a card, so the card's
+                // scale grows to match, never past full size.
+                scale: Math.min(1, (e.previewScale ?? 1) * 1.5),
+                crop: e.previewCrop,
+                preview: <Preview />,
+              };
+            })}
+          />
+        )}
         <div id="lab" className="scroll-mt-20" />
         <LabSearch
           categories={categories}
