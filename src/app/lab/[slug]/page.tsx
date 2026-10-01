@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
 import Link from "next/link";
 import { Arrow } from "@/components/arrow";
+import { InstallCommand } from "@/components/install-command";
 import { NewMark } from "@/components/new-mark";
 import { SiteHeader } from "@/components/site-header";
 import { LabDemo } from "@/lab/demos";
@@ -159,6 +160,8 @@ export default async function LabPage({ params }: PageProps<"/lab/[slug]">) {
             View source
           </a>
         </div>
+
+        <InstallCommand url={absoluteUrl(`/r/${entry.slug}.json`)} />
 
         {/* Walks the lab in the sidebar's order, so you can browse without
             going back to the index. */}

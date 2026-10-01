@@ -13,6 +13,10 @@ export function GET() {
     "",
     `${site.name} is ${site.author.name}'s (${site.author.handle}) personal lab of small React interaction experiments. It is not a component library or a package: each piece is something he built because he liked how it felt, with its own page, a live demo and a link to its TypeScript source on GitHub (${site.repo}).`,
     "",
+    "## Install",
+    "",
+    `Every experiment installs into a project set up with shadcn and Tailwind CSS v4: \`npx shadcn@latest add ${site.url}/r/<slug>.json\`. The slug is the last part of its page URL. All of them, as JSON: ${absoluteUrl("/r/registry.json")}. Agents can add the skill with \`npx skills add ${site.repo.replace("https://github.com/", "")}\`.`,
+    "",
     "## Experiments",
     "",
     ...lab.map(
