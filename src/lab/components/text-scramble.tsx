@@ -86,7 +86,9 @@ export function useScramble<T extends HTMLElement>(text: string) {
       }
       frame.current = requestAnimationFrame(step);
     };
-    frame.current = requestAnimationFrame(step);
+    // Fill the first frame before hit testing, so the button never shrinks
+    // under a stationary pointer and retriggers pointerenter.
+    step(start);
   }, [text, reduceMotion]);
 
   return { ref, scramble };
@@ -109,7 +111,8 @@ function ScrambleItem({ index, label }: { index: number; label: string }) {
         {/* Mono is load-bearing here: every glyph is the same width, so the
             word doesn't jitter sideways while it decodes. */}
         <span className="sr-only">{label}</span>
-        <span ref={ref} aria-hidden>
+        {/* Replaced animation nodes must not become pointer event targets. */}
+        <span ref={ref} aria-hidden className="pointer-events-none">
           {label}
         </span>
       </button>
