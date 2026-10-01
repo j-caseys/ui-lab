@@ -192,6 +192,7 @@ import SignaturePadDemo from "./components/signature-pad";
 import CardNumberRevealDemo from "./components/card-number-reveal";
 import SidebarHighlightDemo from "./components/sidebar-highlight";
 import PaymentCardDemo from "./components/payment-card";
+import SidebarSubmenuDemo from "./components/sidebar-submenu";
 // new-component:imports
 
 // The index shows every demo at once, so one static bundle beats 27 separate
@@ -390,5 +391,6 @@ export const previews: Record<string, ComponentType> = {
   "card-number-reveal": CardNumberRevealDemo,
   "sidebar-highlight": SidebarHighlightDemo,
   "payment-card": PaymentCardDemo,
+  "sidebar-submenu": SidebarSubmenuDemo,
   // new-component:entries
 };

@@ -200,6 +200,7 @@ const demos: Record<string, ComponentType> = {
   "card-number-reveal": dynamic(() => import("./components/card-number-reveal")),
   "sidebar-highlight": dynamic(() => import("./components/sidebar-highlight")),
   "payment-card": dynamic(() => import("./components/payment-card")),
+  "sidebar-submenu": dynamic(() => import("./components/sidebar-submenu")),
   // new-component:entries
 };
 

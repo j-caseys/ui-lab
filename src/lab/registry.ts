@@ -1699,6 +1699,16 @@ export const lab: LabEntry[] = [
     previewScale: 0.5,
     credit: { name: "Adam Whitcroft", url: "https://x.com/adamwhitcroft" },
   },
+  {
+    slug: "sidebar-submenu",
+    isNew: true,
+    name: "Sidebar sub-menu",
+    category: "navigation",
+    description: "Opens one section at a time and lights the branch from the title down to the item you are on.",
+    keywords: "sidebar submenu tree nav accordion connector active branch",
+    previewScale: 0.65,
+    credit: { name: "Pranav Patel", url: "https://x.com/thatspranav" },
+  },
   // new-component:entries
 ];
 
